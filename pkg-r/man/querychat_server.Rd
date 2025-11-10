@@ -20,6 +20,9 @@ elements:
 \item \code{title}: A reactive that returns the current title.
 \item \code{df}: A reactive that returns the filtered data as a data.frame.
 \item \code{chat}: The \link[ellmer:Chat]{ellmer::Chat} object that powers the chat interface.
+\item \code{update_query}: A function to programmatically update the query and title.
+\item \code{clear_chat}: A function to clear the chat history. Takes an optional
+\code{reset_dashboard} argument (default TRUE) to also reset the data filter.
 }
 }
 \description{

@@ -190,6 +190,9 @@ querychat_ui <- function(id) {
 #' - `title`: A reactive that returns the current title.
 #' - `df`: A reactive that returns the filtered data as a data.frame.
 #' - `chat`: The [ellmer::Chat] object that powers the chat interface.
+#' - `update_query`: A function to programmatically update the query and title.
+#' - `clear_chat`: A function to clear the chat history. Takes an optional
+#'   `reset_dashboard` argument (default TRUE) to also reset the data filter.
 #'
 #' @export
 querychat_server <- function(id, querychat_config) {
@@ -274,6 +277,23 @@ querychat_server <- function(id, querychat_config) {
       update_query = function(query, title = NULL) {
         current_query(query)
         current_title(title)
+      },
+      clear_chat = function(reset_dashboard = TRUE) {
+        # Clear the chat history while preserving system prompt and tools
+        chat$set_turns(list())
+
+        # Optionally reset the dashboard to show all data
+        if (reset_dashboard) {
+          reset_query()
+        }
+
+        # Append the greeting message again
+        shinychat::chat_append(
+          "chat",
+          querychat_greeting(querychat_config, generate = FALSE, stream = FALSE)
+        )
+
+        invisible(NULL)
       }
     )
   })
