@@ -35,7 +35,7 @@ for faster startup times and lower costs. If you don't provide a greeting in
 conversation, using this function.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 penguins_config <- querychat_init(penguins)
 
 # Generate a new greeting

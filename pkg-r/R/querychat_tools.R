@@ -170,7 +170,7 @@ querychat_tool_result <- function(
       display = list(
         title = if (action == "update" && !is.null(title)) title,
         show_request = is_error,
-        markdown = display_md,
+        # markdown = display_md,
         open = !is_error && action != "reset"
       )
     )
