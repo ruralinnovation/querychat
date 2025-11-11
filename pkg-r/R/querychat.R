@@ -281,7 +281,13 @@ querychat_server <- function(id, querychat_config) {
       clear_chat = function(reset_dashboard = TRUE) {
 
         print("Attempting to clear Homer's chat log...")
-        
+
+        # Clear the chat log
+        shinychat::chat_clear(
+          "chat", # <= TODO: parameterize id
+          session = session
+        )
+
         # Clear the chat history while preserving system prompt and tools
         chat$set_turns(list())
 
@@ -289,12 +295,7 @@ querychat_server <- function(id, querychat_config) {
         if (reset_dashboard) {
           reset_query()
         }
-
-        # Clear the chat log
-        shinychat::chat_clear(
-          "chat", # <= TODO: parameterize id
-          session = session
-        )
+        
         # Append the greeting message again
         shinychat::chat_append(
           "chat", # <= TODO: parameterize id
